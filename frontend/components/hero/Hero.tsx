@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import { Sparkles, ArrowRight, Star } from "lucide-react";
@@ -90,8 +91,8 @@ export default function Hero() {
               <Button
                 size="lg"
                 className="w-full sm:w-auto rounded-xl h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white text-base shadow-lg shadow-blue-600/20 transition-all hover:shadow-blue-600/30 hover:-translate-y-0.5"
-              >
-                Book Service Now
+              ><Link href="/signup">
+                Book Service Now </Link>
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button
