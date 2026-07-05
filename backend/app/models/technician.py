@@ -20,42 +20,37 @@ from app.models.enums import TechnicianSpecialization
 class Technician(Base):
     __tablename__ = "technicians"
 
-    bookings = relationship(
-    "Booking",
-    back_populates="technician"
-)
-
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         primary_key=True,
-        default=uuid.uuid4
+        default=uuid.uuid4,
     )
 
     profile_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         ForeignKey("profiles.id", ondelete="CASCADE"),
         unique=True,
-        nullable=False
+        nullable=False,
     )
 
     specialization: Mapped[TechnicianSpecialization] = mapped_column(
         Enum(TechnicianSpecialization, name="technician_specialization"),
-        nullable=False
+        nullable=False,
     )
 
     experience: Mapped[int] = mapped_column(
         Integer,
-        default=0
+        default=0,
     )
 
     rating: Mapped[float] = mapped_column(
         Float,
-        default=5.0
+        default=5.0,
     )
 
     is_available: Mapped[bool] = mapped_column(
         Boolean,
-        default=True
+        default=True,
     )
 
     latitude: Mapped[float | None] = mapped_column(Float)
@@ -64,10 +59,15 @@ class Technician(Base):
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        server_default=func.now()
+        server_default=func.now(),
     )
 
     profile = relationship(
         "Profile",
-        back_populates="technician"
+        back_populates="technician",
+    )
+
+    bookings = relationship(
+        "Booking",
+        back_populates="technician",
     )

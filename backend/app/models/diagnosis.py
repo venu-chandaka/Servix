@@ -1,13 +1,8 @@
 import uuid
 
-from sqlalchemy import (
-    Text,
-    Float,
-    ForeignKey,
-)
-
+from sqlalchemy import Float, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
 
@@ -18,13 +13,13 @@ class Diagnosis(Base):
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         primary_key=True,
-        default=uuid.uuid4
+        default=uuid.uuid4,
     )
 
     booking_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         ForeignKey("bookings.id"),
-        unique=True
+        unique=True,
     )
 
     predicted_issue: Mapped[str] = mapped_column(Text)
@@ -41,5 +36,5 @@ class Diagnosis(Base):
 
     booking = relationship(
         "Booking",
-        back_populates="diagnosis"
+        back_populates="diagnosis",
     )
